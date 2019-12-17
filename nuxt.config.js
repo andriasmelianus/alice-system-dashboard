@@ -49,10 +49,12 @@ export default {
       local: {
         endpoints: {
           login: {url: 'http://gateway.local/auth/login', method: 'post', propertyName: 'token'},
-          login: {url: 'http://gateway.local/auth/logout', method: 'post'},
-          login: {url: 'http://gateway.local/auth/user', method: 'get', propertyName: 'user'},
+          logout: {url: 'http://gateway.local/auth/logout', method: 'post'},
+          user: {url: 'http://gateway.local/auth/user', method: 'get', propertyName: false},
         },
         tokenRequired: true,
+        tokenName: 'Authorization',
+        tokenType: 'Bearer'
       }
     }
   },
@@ -63,7 +65,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
