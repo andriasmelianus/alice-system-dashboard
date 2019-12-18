@@ -5,8 +5,11 @@
 <script>
 export default {
   middleware: 'auth',
-  beforeMount(){
-    this.$auth.logout();
+  layout: 'dashboard',
+  head() {
+    return {
+      title: 'Data Penjualan'
+    }
   }
 }
 </script>
