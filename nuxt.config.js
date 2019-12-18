@@ -1,12 +1,20 @@
 import colors from 'vuetify/es5/util/colors'
 
+var appName = 'Alice System'
+
 export default {
   mode: 'universal',
+  /**
+   * Environment variables
+   */
+  env: {
+    appName: appName,
+  },
   /*
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
+    titleTemplate: '%s - ' + appName,
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
