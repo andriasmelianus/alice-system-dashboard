@@ -54,13 +54,8 @@
 
     <!-- Isi setiap halaman/route -->
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <!-- Bagian router-view untuk setiap pages -->
-        <nuxt />
-      </v-container>
+      <!-- Bagian router-view untuk setiap pages -->
+      <nuxt />
     </v-content>
 
 

@@ -1,7 +1,7 @@
 <script>
-import { Bar } from 'vue-chartjs'
+import { Line } from 'vue-chartjs'
 export default {
-  extends: Bar,
+  extends: Line,
   mounted() {
     this.renderChart(this.rawData, this.options)
   },
@@ -11,19 +11,35 @@ export default {
       labels: [2014, 2015, 2016, 2017, 2018, 2019],
       datasets: [{
         label: 'Jumlah Penjualan',
-        data: [12, 9, 10, 29, 22, 15, 31],
+        data: [12, 9, 10, 29, 22, 31],
 
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)'
-        ],
-        borderWidth: 1
+        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 2
       }]
     },
 
-    options: []
+    options: {
+      responsive: true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          },
+        }],
+        yAxes: [{
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        }]
+      }
+    }
   })
 }
 </script>
