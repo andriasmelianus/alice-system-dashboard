@@ -1,5 +1,5 @@
 export const navigationData = [
-  { title:'Dashboard', url:'/', icon:'mdi-gauge'},
+  {title:'Dashboard', url:'/', icon:'mdi-gauge'},
 
   {
     title:'Perusahaan',
@@ -20,22 +20,9 @@ export const navigationData = [
     ]
   },
 
-  {
-    title:'Produk',
-    icon:'mdi-food-apple',
-    expanded: true,
-    children: [
-      { title: 'Data Produk', url: '/product' },
-    ]
-  },
+  {title:'Produk',url:'/product',icon:'mdi-food-apple'},
 
-  {
-    title:'Harga',
-    icon:'mdi-tag-multiple',
-    children: [
-      { title: 'Data Harga', url: '/price' },
-    ]
-  },
+  {title:'Harga',url:'/price',icon:'mdi-tag-multiple'},
 
   {
     title:'Penjualan',
