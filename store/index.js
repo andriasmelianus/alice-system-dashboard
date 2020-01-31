@@ -1,9 +1,11 @@
 export const state = () => ({
-  counter: 0
+  apiUrl: 'http://gateway.local'
 })
 
-export const mutations = {
-  increment(state) {
-    state.counter++
+export const getters = {
+  apiUrl(state,getters,rootState){
+    return function(uri=''){
+      return state.apiUrl + uri
+    }
   }
 }
