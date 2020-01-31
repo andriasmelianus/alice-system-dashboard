@@ -2,6 +2,17 @@ export const navigationData = [
   {title:'Dashboard', url:'/', icon:'mdi-gauge'},
 
   {
+    title: 'Akses Kontrol *',
+    icon: 'mdi-account-key',
+    children: [
+      {title: 'Services', url:'/auth/service'},
+      {title: 'Role', url:'/auth/role'},
+      {title: 'User', url:'/auth/user'},
+      {title: 'Company', url:'/auth/company'},
+    ]
+  },
+
+  {
     title:'Perusahaan',
     icon:'mdi-office-building',
     children: [
