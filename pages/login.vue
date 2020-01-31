@@ -6,23 +6,39 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title> Login - {{ this.appName }} </v-toolbar-title>
+                <v-toolbar-title>Login - {{ this.appName }}</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
 
               <v-form @submit.prevent="submitLogin">
                 <v-card-text>
-                    <v-text-field v-model="username" :error-messages="invalidUsernameMessage" label="Username" name="username" prepend-icon="mdi-account-lock" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="username"
+                    :error-messages="invalidUsernameMessage"
+                    label="Username"
+                    name="username"
+                    prepend-icon="mdi-account-lock"
+                    type="text"
+                  ></v-text-field>
 
-                    <v-text-field v-model="password" :error-messages="invalidPasswordMessage" label="Password" name="password" prepend-icon="mdi-lock" type="password"></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    :error-messages="invalidPasswordMessage"
+                    label="Password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                  ></v-text-field>
 
-                    <v-checkbox :checked="remember" label="Ingat saya" color="primary"></v-checkbox>
+                  <v-checkbox :checked="remember" label="Ingat saya" color="primary"></v-checkbox>
                 </v-card-text>
 
                 <v-card-actions>
                   <v-btn color="primary" type="submit">Masuk</v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="default" v-show="false"><v-icon>mdi-account-circle</v-icon>&nbsp; Daftar...</v-btn>
+                  <v-btn color="default" v-show="false">
+                    <v-icon>mdi-account-circle</v-icon>&nbsp; Daftar...
+                  </v-btn>
                 </v-card-actions>
               </v-form>
             </v-card>
@@ -33,56 +49,67 @@
 
     <v-snackbar v-model="loginFail" color="error" :top="true">
       Login gagal
+      <br />
+      {{ otherErrorMessage }}
     </v-snackbar>
   </v-app>
 </template>
 
 <script>
 export default {
-  head(){
+  head() {
     return {
-      title: 'Login'
-    }
+      title: "Login"
+    };
   },
 
   data: () => ({
     appName: process.env.appName,
-    username: '',
-    password: '',
+    username: "",
+    password: "",
 
     remember: false,
 
     loginFail: false,
-    invalidUsernameMessage: '',
-    invalidPasswordMessage: '',
+    invalidUsernameMessage: "",
+    invalidPasswordMessage: "",
+    otherErrorMessage: ""
   }),
 
-  beforeMount(){
-    this.$auth.logout();
+  beforeMount() {
+    if (this.$auth.$state.loggedIn) {
+      this.$router.push("/logout");
+    }
   },
 
   methods: {
-    submitLogin: function(){
-      this.$auth.loginWith('local', {
-        data: {
-          username: this.username,
-          password: this.password,
-          remember: this.remember
-        }
-      }).then((result) => {
+    submitLogin: function() {
+      let vm = this;
+      vm.$auth
+        .loginWith("local", {
+          data: {
+            username: vm.username,
+            password: vm.password,
+            remember: vm.remember
+          }
+        })
+        .then(function(result) {})
+        .catch(err => {
+          if (err.response) {
+            console.log(err.response.data);
 
-      }).catch((err) => {
-        console.log(err.response.data)
-
-        this.loginFail = true
-        this.invalidUsernameMessage = err.response.data.error.username
-        this.invalidPasswordMessage = err.response.data.error.password
-      });
+            vm.loginFail = true;
+            vm.invalidUsernameMessage = err.response.data.error.username;
+            vm.invalidPasswordMessage = err.response.data.error.password;
+          } else {
+            vm.loginFail = true;
+            vm.otherErrorMessage = err.message;
+          }
+        });
     }
   }
-}
+};
 </script>
 
 <style>
-
 </style>
