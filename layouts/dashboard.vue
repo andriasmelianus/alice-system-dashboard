@@ -1,34 +1,21 @@
 <template>
   <v-app id="inspire">
     <!-- NAVIGASI aplikasi -->
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="$vuetify.breakpoint.lgAndUp"
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <alice-navigation></alice-navigation>
     </v-navigation-drawer>
     <!-- NAVIGASI aplikasi -->
 
-
     <!-- HEADER aplikasi -->
-    <v-app-bar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
-      app
-      color="blue darken-3"
-      dark
-    >
+    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark>
       <!--
         Section ini tidak dapat dipisahkan dengan layout/dashboard,
         karena section ini berfungsi sebagai switch tampil/sembunyi menu.
       -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
-      <v-toolbar-title
-        style="width: 300px"
-        class="ml-0 pl-4"
-      >
-        <span class="hidden-sm-and-down">Alice System</span>
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
+        <span class="hidden-sm-and-down">{{ appName }}</span>
       </v-toolbar-title>
       <v-text-field
         flat
@@ -47,10 +34,8 @@
       </v-btn>
 
       <user-menu></user-menu>
-
     </v-app-bar>
     <!-- HEADER aplikasi -->
-
 
     <!-- Isi setiap halaman/route -->
     <v-content>
@@ -58,6 +43,7 @@
       <nuxt />
     </v-content>
 
+    <global-notification></global-notification>
 
     <!-- <v-btn
       bottom
@@ -68,25 +54,27 @@
       right
     >
       <v-icon>mdi-plus</v-icon>
-    </v-btn> -->
+    </v-btn>-->
   </v-app>
 </template>
 
 <script>
-  import UserMenu from '~/components/_dashboard/header/user-menu'
-  import AliceNavigation from '~/components/_dashboard/navigation/index'
-  export default {
-    props: {
-      source: String,
-    },
+import UserMenu from "~/components/_dashboard/header/user-menu";
+import AliceNavigation from "~/components/_dashboard/navigation/index";
+import GlobalNotification from "~/components/global-notification";
+export default {
+  props: {
+    source: String
+  },
 
-    components: {
-      UserMenu,
-      AliceNavigation
-    },
-    data: () => ({
-      appName: process.env.appName,
-      drawer: true,
-    }),
-  }
+  components: {
+    UserMenu,
+    AliceNavigation,
+    GlobalNotification
+  },
+  data: () => ({
+    appName: process.env.appName,
+    drawer: true
+  })
+};
 </script>
