@@ -156,7 +156,7 @@ export default {
     permissionFormShown: false,
     permissionHeaders: [
       { text: "Layanan", value: "service" },
-      { text: "Nama", value: "name", align: "left" },
+      { text: "Nama", value: "permission", align: "left" },
       { text: "slug", value: "slug" }
     ],
     permissions: undefined,
