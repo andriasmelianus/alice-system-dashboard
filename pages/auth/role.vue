@@ -212,6 +212,7 @@ export default {
        * Karena terdapat 2 proses, pemberian tick & penghapusan tick
        */
       let vm = this;
+      vm.permissionsToRemove = [];
 
       if (item.value) {
         let selectedRoleId = item.item.id;
