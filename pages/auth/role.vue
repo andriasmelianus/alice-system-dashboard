@@ -6,6 +6,12 @@
           <v-card-title>Role</v-card-title>
           <v-card-subtitle>Role adalah kumpulan permission yang menentukan peran seorang pengguna. Setiap role dapat menyimpan beberapa permission sekaligus. Pengguna dapat memiliki role lebih dari satu.</v-card-subtitle>
 
+          <v-card-text>
+            <v-btn @click="roleFormShown = true" color="success">Tambah</v-btn>
+            <v-btn @click="updateRole" color="warning" v-if="selectedRole.length > 0">Ubah</v-btn>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <v-btn @click="deleteRole" color="error" v-if="selectedRole.length > 0">Hapus</v-btn>
+          </v-card-text>
+
           <v-data-table
             show-select
             single-select
@@ -53,13 +59,6 @@
               </v-dialog>
             </template>
           </v-data-table>
-
-          <v-card-actions>
-            <v-btn @click="roleFormShown = true" color="success">Tambah</v-btn>
-            <v-btn @click="updateRole" color="warning" v-if="selectedRole.length > 0">Ubah</v-btn>
-            <v-spacer></v-spacer>
-            <v-btn @click="deleteRole" color="error" v-if="selectedRole.length > 0">Hapus</v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
 
@@ -68,48 +67,42 @@
           <v-card-title>Permission</v-card-title>
           <v-card-subtitle>Permission adalah satuan akses yang mendeskripsikan hak yang dapat dimiliki oleh pengguna melalui role.</v-card-subtitle>
 
-          <div v-if="selectedRole.length > 0">
-            <v-data-table
-              show-select
-              :headers="permissionHeaders"
-              :items="permissions"
-              v-model="permissionsToRemove"
-            >
-              <template v-slot:top>
-                <v-dialog v-model="permissionFormShown" max-width="650px">
-                  <v-card>
-                    <v-card-title>Data Permission</v-card-title>
-
-                    <v-data-table
-                      show-select
-                      :headers="permissionHeaders"
-                      :items="permissionsSelect"
-                      v-model="permissionsSelected"
-                    ></v-data-table>
-
-                    <v-card-actions>
-                      <v-btn @click="addPermission" color="info">Pilih</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </template>
-            </v-data-table>
-          </div>
-
-          <!-- <div v-else
-            class="caption">
-            Pilih role terlebih dahulu
-          </div>-->
-          <v-card-text v-else class="caption">Pilih role terlebih dahulu</v-card-text>
-
-          <v-card-actions v-if="selectedRole.length > 0">
+          <v-card-text v-if="selectedRole.length > 0">
             <v-btn @click="permissionFormShown = true" color="success">Tambah</v-btn>
             <v-btn
               @click="removePermission"
               v-if="permissionsToRemove.length > 0"
               color="error"
             >Hapus</v-btn>
-          </v-card-actions>
+          </v-card-text>
+          <v-data-table
+            v-if="selectedRole.length > 0"
+            show-select
+            :headers="permissionHeaders"
+            :items="permissions"
+            v-model="permissionsToRemove"
+          >
+            <template v-slot:top>
+              <v-dialog v-model="permissionFormShown" max-width="650px">
+                <v-card>
+                  <v-card-title>Data Permission</v-card-title>
+
+                  <v-data-table
+                    show-select
+                    :headers="permissionHeaders"
+                    :items="permissionsSelect"
+                    v-model="permissionsSelected"
+                  ></v-data-table>
+
+                  <v-card-actions>
+                    <v-btn @click="addPermission" color="info">Pilih</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </template>
+          </v-data-table>
+
+          <v-card-text v-else class="caption">Pilih role terlebih dahulu</v-card-text>
         </v-card>
       </v-col>
     </v-row>

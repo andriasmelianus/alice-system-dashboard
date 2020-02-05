@@ -6,6 +6,11 @@
           <v-card-title>Pengguna</v-card-title>
           <v-card-subtitle>Daftar pengguna yang dapat mengakses sistem. Anda dapat mengelola role yang melekat pada seorang user.</v-card-subtitle>
 
+          <v-card-text>
+            <v-btn @click="userDataFormShown = true" color="success">Tambah</v-btn>
+            <v-btn @click="updateUser" color="warning" v-if="userDataSelected.length > 0">Ubah</v-btn>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <v-btn @click="deleteUserData" color="error" v-if="userDataSelected.length > 0">Hapus</v-btn>
+          </v-card-text>
           <v-data-table
             :headers="userDataHeaders"
             :items="userData"
@@ -150,16 +155,10 @@
                   <v-chip :color="item.is_active ? 'success' : 'default'" v-on="on">{{ item.name }}</v-chip>
                 </template>
 
-                <span>{{ item.is_active ? 'Pengguna aktif' : 'Pengguna tidak aktif' }}</span>
+                <span>{{ item.is_active ? "Pengguna aktif" : "Pengguna tidak aktif" }}</span>
               </v-tooltip>
             </template>
           </v-data-table>
-
-          <v-card-actions>
-            <v-btn @click="userDataFormShown = true" color="success">Tambah</v-btn>
-            <v-btn @click="updateUser" color="warning" v-if="userDataSelected.length > 0">Ubah</v-btn>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <v-btn @click="deleteUserData" color="error" v-if="userDataSelected.length > 0">Hapus</v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="4">
@@ -167,6 +166,18 @@
           <v-card-title>Role</v-card-title>
           <v-card-subtitle>Role di bawah ini merupakan role yang dimiliki pengguna yang sedang dipilih pada tabel di samping.</v-card-subtitle>
 
+          <v-card-text v-if="userDataSelected.length > 0">
+            <v-btn
+              @click="roleToAddFormShown = true"
+              color="success"
+              v-if="userDataSelected.length > 0"
+            >Tambah</v-btn>
+            <v-btn
+              @click="removeRoleUser"
+              color="error"
+              v-if="roleUserDataSelected.length > 0"
+            >Hapus</v-btn>
+          </v-card-text>
           <v-data-table
             v-if="userDataSelected.length > 0"
             show-select
@@ -182,6 +193,7 @@
 
                   <v-data-table
                     show-select
+                    items-per-page="5"
                     :headers="roleToAddDataHeaders"
                     v-model="roleToAddDataSelected"
                     :items="roleToAddData"
@@ -196,19 +208,6 @@
           </v-data-table>
 
           <v-card-text v-else>Pilih salah satu pengguna terlebih dahulu.</v-card-text>
-
-          <v-card-actions>
-            <v-btn
-              @click="roleToAddFormShown = true"
-              color="success"
-              v-if="userDataSelected.length > 0"
-            >Tambah</v-btn>
-            <v-btn
-              @click="removeRoleUser"
-              color="error"
-              v-if="roleUserDataSelected.length > 0"
-            >Hapus</v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -360,6 +359,7 @@ export default {
     userDataSelect(item) {
       let vm = this;
       if (item.value) {
+        vm.roleUserDataSelected = [];
         vm.$axios
           .$get(vm.$store.getters.apiUrl("/auth/role-by-user"), {
             params: {
