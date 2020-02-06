@@ -4,7 +4,7 @@
       <v-col cols="8">
         <v-card shaped>
           <v-card-title>Data Perusahaan</v-card-title>
-          <v-card-subtitle>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate cum neque fugiat nostrum repudiandae amet ratione ipsam minima molestias. Quae iure voluptatem doloribus illo qui! Amet repudiandae fuga ut saepe!</v-card-subtitle>
+          <v-card-subtitle>Daftar perusahaan yang terdaftar pada sistem. Klik untuk melihat data pengguna dan data cabang yang ada di bawahnya.</v-card-subtitle>
 
           <v-card-text>
             <v-btn @click="companyDataFormShown = true" color="success">Tambah</v-btn>
