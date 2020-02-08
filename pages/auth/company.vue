@@ -142,7 +142,7 @@
                 v-if="companyDataSelected.length > 0"
                 :headers="companyUserDataHeaders"
                 :items="companyUserData"
-                items-per-page="5"
+                :items-per-page="5"
               >
                 <template v-slot:item.is_active="{ item }">
                   <v-chip color="success" small v-if="item.is_active">Aktif</v-chip>

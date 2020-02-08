@@ -184,7 +184,7 @@
             :headers="roleUserDataHeaders"
             :items="roleUserData"
             v-model="roleUserDataSelected"
-            items-per-page="5"
+            :items-per-page="5"
           >
             <template v-slot:top>
               <v-dialog v-model="roleToAddFormShown" max-width="650px">
@@ -193,7 +193,7 @@
 
                   <v-data-table
                     show-select
-                    items-per-page="5"
+                    :items-per-page="5"
                     :headers="roleToAddDataHeaders"
                     v-model="roleToAddDataSelected"
                     :items="roleToAddData"
