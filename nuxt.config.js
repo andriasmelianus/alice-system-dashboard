@@ -61,7 +61,7 @@ export default {
           },
           logout: { url: "http://gateway.local/auth/logout", method: "post" },
           user: {
-            url: "http://gateway.local/auth/user",
+            url: "http://gateway.local/auth/user-by-me",
             method: "get",
             propertyName: false
           }
