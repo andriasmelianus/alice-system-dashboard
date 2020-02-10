@@ -110,7 +110,6 @@
 </template>
 
 <script>
-import AliceTable from "~/components/table/alice-table";
 export default {
   middleware: "auth",
   layout: "dashboard",
@@ -118,9 +117,6 @@ export default {
     return {
       title: "Data Role dan Permission"
     };
-  },
-  components: {
-    AliceTable
   },
 
   data: () => ({
