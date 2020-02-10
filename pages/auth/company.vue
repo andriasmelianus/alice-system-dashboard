@@ -138,8 +138,20 @@
               <v-card-title>Pengguna</v-card-title>
               <v-card-subtitle>Data pengguna yang terdaftar pada perusahaan terpilih.</v-card-subtitle>
 
+              <v-card-text v-if="companyDataSelected.length > 0">
+                <v-btn @click="companyUserDataFormShown = true" color="success">Tambah</v-btn>
+                <v-btn
+                  @click="removeCompanyUserData"
+                  color="error"
+                  v-if="companyUserDataSelected.length > 0"
+                >Hapus</v-btn>
+              </v-card-text>
+
               <v-data-table
                 v-if="companyDataSelected.length > 0"
+                show-select
+                single-select
+                v-model="companyUserDataSelected"
                 :headers="companyUserDataHeaders"
                 :items="companyUserData"
                 :items-per-page="5"
@@ -147,6 +159,43 @@
                 <template v-slot:item.is_active="{ item }">
                   <v-chip color="success" small v-if="item.is_active">Aktif</v-chip>
                   <v-chip color="default" small v-else>Tidak Aktif</v-chip>
+                </template>
+
+                <template v-slot:top>
+                  <v-dialog v-model="companyUserDataFormShown" max-width="400px">
+                    <v-card>
+                      <v-card-title>Tambah Pengguna Baru</v-card-title>
+                      <v-card-subtitle>Pengguna yang anda tambahkan akan dapat mengakses menu-menu yang ada sesuai dengan role dan permission yang dimilikinya.</v-card-subtitle>
+
+                      <v-card-text>
+                        <v-form>
+                          <v-text-field
+                            v-model="companyUserDataUsername"
+                            :error-messages="companyUserDataError.username"
+                            @change="getUserNameByUsername"
+                            label="Username"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="companyUserDataToAdd.name"
+                            disabled
+                            label="Nama Pengguna"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="companyUserDataTitle"
+                            label="Jabatan"
+                            :error-messages="companyUserDataError.title"
+                          ></v-text-field>
+                        </v-form>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn @click="addCompanyUserData" color="success">Tambahkan</v-btn>
+                        <v-btn @click="closeCompanyUserDataForm" color="default">Batal</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
                 </template>
               </v-data-table>
 
@@ -245,6 +294,13 @@ export default {
       { text: "Aktif", value: "is_active" }
     ],
     companyUserData: undefined,
+    companyUserDataSelected: [],
+    companyUserDataFormShown: false,
+    companyUserDataUsername: "",
+    companyUserDataToAdd: { name: "" },
+    companyUserDataTitle: "",
+    companyUserDataError: { username: [], title: [] },
+    companyUserDataErrorDefault: { username: [], title: [] },
 
     branchDataHeaders: [
       { text: "Cabang", value: "name" },
@@ -253,6 +309,14 @@ export default {
     ],
     branchData: undefined
   }),
+
+  watch: {
+    companyUserDataFormShown(isShown) {
+      if (!isShown) {
+        this.closeCompanyUserDataForm();
+      }
+    }
+  },
 
   mounted() {
     let vm = this;
@@ -401,11 +465,119 @@ export default {
       }
     },
 
+    /**
+     * Mendapatkan data user berdasarkan username.
+     * Data user dibutuhkan untuk ditambahkan pada tabel company_user.
+     *
+     * @param (tidak ada)
+     * @return void
+     */
+    getUserNameByUsername() {
+      let vm = this;
+      vm.$axios
+        .$get(vm.$store.getters.apiUrl("/auth/user-by-username"), {
+          params: {
+            username: vm.companyUserDataUsername
+          }
+        })
+        .then(function(result) {
+          Object.assign(
+            vm.companyUserDataError,
+            vm.companyUserDataErrorDefault
+          );
+          vm.companyUserDataToAdd = result;
+        })
+        .catch(function(error) {
+          Object.assign(
+            vm.companyUserDataToAdd,
+            vm.companyUserDataToAddDefault
+          );
+          Object.assign(vm.companyUserDataError, error.response.data.error);
+          vm.$store.commit("globalNotification/show", {
+            color: "error",
+            message: error
+          });
+        });
+    },
+
+    /**
+     * Menambahkan data pada tabel company_user
+     *
+     * @param (tidak ada)
+     * @return void
+     */
+    addCompanyUserData() {
+      let vm = this;
+      if (vm.companyUserDataToAdd.name != "") {
+        vm.$axios
+          .$post(vm.$store.getters.apiUrl("/company-user"), {
+            company_id: vm.companyDataSelected[0].id,
+            user_id: vm.companyUserDataToAdd.id,
+            title: vm.companyUserDataTitle
+          })
+          .then(function(result) {
+            vm.companyUserData.push(result);
+            vm.closeCompanyUserDataForm();
+          })
+          .catch(function(error) {
+            vm.$store.commit("globalNotification/show", {
+              color: "error",
+              message: error
+            });
+          });
+      } else {
+        vm.$store.commit("globalNotification/show", {
+          color: "error",
+          message:
+            "Tidak dapat menyimpan pengguna karena masih ada inputan yang salah."
+        });
+      }
+    },
+
+    /**
+     * Menghapus user dari perusahaan yang dipilih
+     *
+     * @param (tidak ada)
+     * @return void
+     */
+    removeCompanyUserData() {
+      let vm = this;
+      vm.$axios
+        .$delete(vm.$store.getters.apiUrl("/company-user"), {
+          params: {
+            // company_id: vm.companyDataSelected[0].id,
+            // user_id: vm.companyUserDataSelected[0].user_id
+            company_user_id: vm.companyUserDataSelected[0].id
+          }
+        })
+        .then(function(result) {
+          let companyUserIndexToRemove = vm.companyUserData.indexOf(
+            vm.companyUserDataSelected[0]
+          );
+          vm.companyUserData.splice(companyUserIndexToRemove, 1);
+        })
+        .catch(function(error) {
+          vm.$store.commit("globalNotification/show", {
+            color: "error",
+            message: error
+          });
+        });
+    },
+
     closeCompanyDataForm() {
       let vm = this;
       Object.assign(vm.companyDataEdited, vm.companyDataDefault);
       vm.companyDataFormShown = false;
       vm.companyDataIndex = -1;
+    },
+
+    closeCompanyUserDataForm() {
+      let vm = this;
+      vm.companyUserDataUsername = "";
+      vm.companyUserDataTitle = "";
+      Object.assign(vm.companyUserDataToAdd, vm.companyUserDataToAddDefault);
+      Object.assign(vm.companyUserDataError, vm.companyUserDataErrorDefault);
+      vm.companyUserDataFormShown = false;
     }
   }
 };
