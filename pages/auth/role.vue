@@ -298,7 +298,7 @@ export default {
         permissionsToAdd = vm.permissionsSelected;
 
       vm.$axios
-        .$post(vm.$store.getters.apiUrl("/auth/role-add-permission"), {
+        .$post(vm.$store.getters.apiUrl("/auth/role-permission"), {
           role_id: roleId,
           permissions: permissionsToAdd
         })
@@ -324,7 +324,7 @@ export default {
         });
 
       vm.$axios
-        .$delete(vm.$store.getters.apiUrl("/auth/role-remove-permission"), {
+        .$delete(vm.$store.getters.apiUrl("/auth/role-permission"), {
           params: {
             role_id: roleId,
             permissions: permissionIdsToRemove

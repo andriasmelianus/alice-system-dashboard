@@ -461,7 +461,7 @@ export default {
         roleIdsToAdd = vm.roleToAddDataSelected;
 
       vm.$axios
-        .$post(vm.$store.getters.apiUrl("/auth/user-add-role"), {
+        .$post(vm.$store.getters.apiUrl("/auth/user-role"), {
           user_id: userId,
           roles: roleIdsToAdd
         })
@@ -485,7 +485,7 @@ export default {
             return rolesToRemove[key].role_id;
           });
         vm.$axios
-          .$delete(vm.$store.getters.apiUrl("/auth/user-remove-role"), {
+          .$delete(vm.$store.getters.apiUrl("/auth/user-role"), {
             params: {
               user_id: userId,
               roles: roleIdsToRemove
