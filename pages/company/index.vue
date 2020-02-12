@@ -381,7 +381,8 @@ export default {
      */
     companyUserDataHeaders: [
       { text: "Nama", value: "user" },
-      { text: "Username", value: "username" }
+      { text: "Username", value: "username" },
+      { text: "Jabatan", value: "title" }
     ],
     companyUserData: undefined,
     companyUserDataSelected: [],
