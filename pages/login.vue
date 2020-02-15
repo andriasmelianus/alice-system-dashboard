@@ -30,7 +30,7 @@
                     type="password"
                   ></v-text-field>
 
-                  <v-checkbox :checked="remember" label="Ingat saya" color="primary"></v-checkbox>
+                  <v-checkbox v-model="remember" label="Ingat saya" color="primary"></v-checkbox>
                 </v-card-text>
 
                 <v-card-actions>
