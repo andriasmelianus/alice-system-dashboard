@@ -1,19 +1,13 @@
-<template>
-
-</template>
+<template></template>
 
 <script>
 export default {
-  middleware: 'auth',
-  layout: 'dashboard',
+  middleware: "auth",
+  layout: "dashboard",
   head() {
     return {
-      title: 'Daftar Pelanggan'
-    }
+      title: "Daftar Pelanggan"
+    };
   }
-}
+};
 </script>
-
-<style>
-
-</style>

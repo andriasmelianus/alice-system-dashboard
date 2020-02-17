@@ -1,57 +1,74 @@
 <template>
   <!-- <v-container class="fill-height" fluid> -->
-  <v-container fluid>
-    <v-row align="center" justify="center" dense>
-      <v-col cols="4">
-        <sale-chart></sale-chart>
-      </v-col>
+  <div>
+    <div class="d-flex flex-wrap justify-center">
+      <service-widget-link-one class="ma-2 align-self-start"></service-widget-link-one>
 
-      <v-col cols="4">
-        <purchase-chart></purchase-chart>
-      </v-col>
+      <role-widget-link-one class="ma-2 align-self-start"></role-widget-link-one>
 
-      <v-col cols="4">
-        <npl-chart></npl-chart>
-      </v-col>
+      <user-widget-link-for-system class="ma-2 align-self-start"></user-widget-link-for-system>
 
-      <!-- <v-col cols="4">
-        <chart1 height="130px" />
-      </v-col> -->
+      <company-widget-link-for-system class="ma-2 align-self-start"></company-widget-link-for-system>
 
-    </v-row>
+      <user-widget-link-one class="ma-2 align-self-start"></user-widget-link-one>
 
-    <v-row >
-      <v-col cols="8" sm="6">
-        <customer-card></customer-card>
-      </v-col>
+      <company-widget-link-one class="ma-2 align-self-start"></company-widget-link-one>
 
-    </v-row>
-  </v-container>
+      <link-to-testing-page class="ma-2 align-self-start"></link-to-testing-page>
+    </div>
+
+    <div class="d-flex flex-wrap justify-center mt-4">
+      <sale-widget-line-chart class="ma-2 align-self-start"></sale-widget-line-chart>
+
+      <purchase-widget-line-chart class="ma-2 align-self-start"></purchase-widget-line-chart>
+
+      <company-widget-line-chart class="ma-2 align-self-start"></company-widget-line-chart>
+    </div>
+
+    <div class="d-flex flex-wrap justify-center">
+      <customer-widget-list-one class="ma-2 align-self-start"></customer-widget-list-one>
+    </div>
+  </div>
 </template>
 
 <script>
-import SaleChart from '~/components/_dashboard/chart/sale'
-import PurchaseChart from '~/components/_dashboard/chart/purchase'
-import NplChart from '~/components/_dashboard/chart/npl'
-import Chart1 from '~/components/report/chart/chart1'
+import ServiceWidgetLinkOne from "~/components/service/widget/link-one";
+import RoleWidgetLinkOne from "~/components/role/widget/link-one";
+import UserWidgetLinkForSystem from "~/components/user/widget/link-for-system";
+import CompanyWidgetLinkForSystem from "~/components/company/widget/link-for-system";
+import UserWidgetLinkOne from "~/components/user/widget/link-one";
+import CompanyWidgetLinkOne from "~/components/company/widget/link-one";
+import LinkToTestingPage from "~/components/_other/widget/link-to-testing-page";
 
-import CustomerCard from '~/components/_dashboard/card/customer'
+import SaleWidgetLineChart from "~/components/sale/widget/line-chart";
+import PurchaseWidgetLineChart from "~/components/purchase/widget/line-chart";
+import CompanyWidgetLineChart from "~/components/company/widget/line-chart";
+
+import CustomerWidgetListOne from "~/components/customer/widget/list-one";
+
 export default {
-  middleware: 'auth',
-  layout: 'dashboard',
+  middleware: "auth",
+  layout: "dashboard",
   head() {
     return {
-      title: 'Dashboard'
-    }
+      title: "Dashboard"
+    };
   },
 
   components: {
-    SaleChart,
-    PurchaseChart,
-    NplChart,
-    Chart1,
+    ServiceWidgetLinkOne,
+    RoleWidgetLinkOne,
+    UserWidgetLinkForSystem,
+    CompanyWidgetLinkForSystem,
+    UserWidgetLinkOne,
+    CompanyWidgetLinkOne,
+    LinkToTestingPage,
 
-    CustomerCard
+    SaleWidgetLineChart,
+    PurchaseWidgetLineChart,
+    CompanyWidgetLineChart,
+
+    CustomerWidgetListOne
   }
-}
+};
 </script>
