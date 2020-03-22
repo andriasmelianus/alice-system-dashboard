@@ -5,6 +5,8 @@
     show-select
     single-select
     v-model="selectedRecords"
+    :search="search"
+    @item-selected="handleRecordSelected"
   >
     <template v-slot:top>
       <v-toolbar short flat>
@@ -20,8 +22,14 @@
             @recordCreated="handleRecordCreated($event)"
             @recordUpdated="handleRecordUpdated($event)"
           ></user-form>
-        </v-dialog>
-
+        </v-dialog>&nbsp;
+        <v-text-field
+          label="Cari"
+          v-model="search"
+          append-icon="mdi-magnify"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-spacer></v-spacer>
         <v-toolbar-title class="headline">Data Pengguna</v-toolbar-title>
       </v-toolbar>

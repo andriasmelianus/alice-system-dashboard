@@ -5,6 +5,7 @@
     show-select
     single-select
     v-model="selectedRecords"
+    @item-selected="handleRecordSelected"
   >
     <template v-slot:header.data-table-select>
       <v-menu offset-y open-on-hover>
