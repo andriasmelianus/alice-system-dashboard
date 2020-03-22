@@ -1,62 +1,81 @@
 /**
+ * Mixin global-table merupakan kumpulan data, computed, watch dan methods yang digunakan pada semua v-data-table.
+ * Dengan mengikutsertakan mixin ini, anda akan mendapatkan:
  *
+ * data:
+ *  defaultTableHeaders
+ *  smallTableHeaders
+ *  singleColumnTableHeader
+ *  records
+ *  selectedRecords
+ *  selectedRecord
+ *  selectedRecordIndex
+ *  defaultRecord
+ *  editedRecord
+ *  apiUrl
+ *  formShown
+ *  formEditMode
+ *
+ * computed:
+ *  selectedRecordExists
+ *
+ * watch:
+ *  selectedRecords
+ *  formShown
+ *
+ * methods:
+ *  readRecords
+ *  handleRecordCreated
+ *  handleRecordUpdated
+ *  deleteSingleRecord
+ *  showForm
+ *  closeForm
  */
 export const globalTable = {
   data: () => ({
-    /**
-     *
-     */
-    apiUrl: "",
-    vuexActionPathForReadRecords: "",
-    vuexActionPathForCreateRecord: "",
-    vuexActionPathForUpdateRecord: "",
-    vuexActionPathForDeleteRecord: "",
-    vuexCommitPathForSelectedRecords: "",
-    vuexCommitPathForSetEditMode: "",
+    // Table headers
+    defaultTableHeaders: [],
+    smallTableHeaders: [],
+    singleColumnTableHeader: [],
 
-    /**
-     * Data di bawah ini untuk form
-     */
+    // Table data
+    records: undefined,
+    selectedRecords: [],
+    selectedRecord: {},
+    selectedRecordIndex: undefined,
+    defaultRecord: {},
+    editedRecord: {},
+
+    // Axios URL
+    apiUrl: "",
+
+    // Khusus untuk form
     formShown: false,
     formEditMode: false
   }),
   computed: {
-    /**
-     * storeStateModule berfungsi untuk menentukan path Vuex State.
-     * Item ini SANGAT DISARANKAN di-override pada Mixin table!
-     */
-    storeStateModule() {
-      return this.$store.state;
-    },
-
-    defaultTableHeaders() {
-      return this.storeStateModule.defaultTableHeaders;
-    },
-    smallTableHeaders() {
-      return this.storeStateModule.smallTableHeaders;
-    },
-    singleColumnTableHeader() {
-      return this.storeStateModule.singleColumnTableHeader;
-    },
-    tableRecords() {
-      return this.storeStateModule.records;
-    },
-    selectedRecords: {
-      get() {
-        return this.storeStateModule.selectedRecords;
-      },
-      set(value) {
-        this.$store.commit(this.vuexCommitPathForSelectedRecords, value);
-      }
-    },
-    selectedRecord() {
-      return this.storeStateModule.selectedRecord;
-    },
     selectedRecordExists() {
       return this.selectedRecords.length > 0;
     }
   },
 
+  watch: {
+    selectedRecords(newSelectedRecords, oldSelectedRecords) {
+      //Masukkan record pertama yang terpililh
+      this.selectedRecord = Object.assign(
+        {},
+        this.selectedRecord,
+        newSelectedRecords[0]
+      );
+      this.selectedRecordIndex = this.records.indexOf(newSelectedRecords[0]);
+    },
+
+    formShown(newStatus, oldStatus) {
+      if (!newStatus) {
+        this.closeForm();
+      }
+    }
+  },
   methods: {
     /**
      * Membaca data dari dalam database kemudian dimasukkan ke dalam Vuex
@@ -66,7 +85,7 @@ export const globalTable = {
       vm.$axios
         .$get(vm.$store.getters.apiUrl(vm.apiUrl))
         .then(function(result) {
-          vm.$store.dispatch(vm.vuexActionPathForReadRecords, result);
+          vm.records = result;
         })
         .catch(function(error) {
           vm.$store.commit("globalNotification/show", {
@@ -74,6 +93,39 @@ export const globalTable = {
             message: error
           });
         });
+    },
+
+    /**
+     * Menset editedRecord
+     * @param {Object} editedRecord
+     */
+    setEditedRecord(editedRecord) {
+      this.editedRecord = Object.assign({}, this.editedRecord, editedRecord);
+    },
+
+    /**
+     * Menangani event recordCreated yang dihasilkan dari form
+     * @param {Object} createdRecord
+     */
+    handleRecordCreated(createdRecord) {
+      // Tambahkan createdRecord pada records
+      let recordsCount = this.records.length;
+      this.records.splice(recordsCount, 0, createdRecord);
+      this.closeForm();
+    },
+
+    /**
+     * Menanagani event recordUpdated yang hasilkan dari form
+     * @param {Object} updatedRecord
+     */
+    handleRecordUpdated(updatedRecord) {
+      this.selectedRecord = Object.assign(
+        {},
+        this.selectedRecord,
+        updatedRecord
+      );
+      this.records.splice(this.selectedRecordIndex, 1, updatedRecord);
+      this.closeForm();
     },
 
     /**
@@ -85,11 +137,12 @@ export const globalTable = {
         vm.$axios
           .$delete(vm.$store.getters.apiUrl(vm.apiUrl), {
             params: {
-              id: vm.selectedRecords[0].id
+              id: vm.selectedRecord.id
             }
           })
           .then(function(result) {
-            vm.$store.dispatch(vm.vuexActionPathForDeleteRecord);
+            // vm.$store.dispatch(vm.vuexActionPathForDeleteRecord);
+            vm.records.splice(vm.selectedRecordIndex, 1);
           })
           .catch(function(error) {
             vm.$store.commit("globalNotification/show", {
@@ -101,10 +154,16 @@ export const globalTable = {
     },
 
     showForm(editMode) {
-      this.$store.commit(this.vuexCommitPathForSetEditMode, editMode);
+      if (editMode) {
+        this.setEditedRecord(this.selectedRecord);
+      } else {
+        this.setEditedRecord(this.defaultRecord);
+      }
+      this.formEditMode = editMode;
       this.formShown = true;
     },
     closeForm() {
+      this.formEditMode = false;
       this.formShown = false;
     }
   }

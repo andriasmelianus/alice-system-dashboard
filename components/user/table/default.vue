@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="defaultTableHeaders"
-    :items="tableRecords"
+    :items="records"
     show-select
     single-select
     v-model="selectedRecords"
@@ -31,8 +31,10 @@
         <v-btn @click="deleteSingleRecord" color="error" outlined v-if="selectedRecordExists">
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>&nbsp;
-        <v-dialog v-model="formShown" max-width="400px" ref="formDialog">
+        <v-dialog v-model="formShown" max-width="500px" ref="formDialog">
           <user-form
+            :record="editedRecord"
+            :edit-mode="formEditMode"
             @recordCreated="handleRecordCreated($event)"
             @recordUpdated="handleRecordUpdated($event)"
           ></user-form>
@@ -46,11 +48,10 @@
 </template>
 
 <script>
-import { globalTable } from "~/components/_mixin/global-table";
 import { userTable } from "~/components/user/_mixin/table";
 import UserForm from "~/components/user/form/default";
 export default {
-  mixins: [globalTable, userTable],
+  mixins: [userTable],
 
   components: {
     UserForm
@@ -58,18 +59,6 @@ export default {
 
   mounted() {
     this.readRecords();
-  },
-
-  methods: {
-    handleRecordCreated(createdRecord) {
-      this.$store.commit(this.vuexActionPathForCreateRecord, createdRecord);
-      this.closeForm();
-    },
-
-    handleRecordUpdated(updatedRecord) {
-      this.$store.commit(this.vuexActionPathForUpdateRecord, updatedRecord);
-      this.closeForm();
-    }
   }
 };
 </script>

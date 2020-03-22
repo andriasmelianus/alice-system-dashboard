@@ -1,36 +1,46 @@
 export const globalForm = {
-  data: () => ({
-    recordError: {} //Must be assigned to a proper object
-  }),
-  computed: {
-    storeStateModule() {
-      return this.$store.state; //Need to override
+  props: {
+    record: {
+      type: Object,
+      default: function() {
+        return {};
+      }
     },
-
-    editedRecord() {
-      return this.storeStateModule.editedRecord;
+    editMode: {
+      type: Boolean,
+      default: false
     }
   },
+  data: () => ({
+    defaultRecordError: {},
+    recordError: {}, //Must be assigned to a proper object
 
-  mounted() {
-    this.prepareForm();
+    apiUrl: ""
+  }),
+
+  watch: {
+    record(newRecord) {
+      this.recordError = Object.assign(
+        {},
+        this.recordError,
+        this.defaultRecordError
+      );
+    }
   },
-
   methods: {
-    prepareForm() {
-      //Reset pesan error pada form
-      Object.assign(this.recordError, this.storeStateModule.defaultRecordError);
-    },
-
     /**
      * Method untuk men-submit form
      */
     submitForm() {
-      Object.assign(this.recordError, this.storeStateModule.defaultRecordError);
+      this.recordError = Object.assign(
+        {},
+        this.recordError,
+        this.defaultRecordError
+      );
       if (!this.editMode) {
-        this.createRecord(this.editedRecord);
+        this.createRecord(this.record);
       } else {
-        this.updateRecord(this.editedRecord);
+        this.updateRecord(this.record);
       }
     },
 
@@ -44,13 +54,15 @@ export const globalForm = {
       vm.$axios
         .$post(vm.$store.getters.apiUrl(vm.apiUrl), newRecord)
         .then(function(result) {
-          // vm.$store.dispatch(vm.vuexActionPathForCreateRecord, result);
-
           //Picu event recordCreated, kirimkan data ke parent component
           vm.$emit("recordCreated", result);
         })
         .catch(function(error) {
-          Object.assign(vm.recordError, error.response.data.error);
+          vm.recordError = Object.assign(
+            {},
+            vm.recordError,
+            error.response.data.error
+          );
           vm.$store.commit("globalNotification/show", {
             color: "error",
             message: error
@@ -68,13 +80,15 @@ export const globalForm = {
       vm.$axios
         .$put(vm.$store.getters.apiUrl(vm.apiUrl), updatedRecord)
         .then(function(result) {
-          // vm.$store.dispatch(vm.vuexActionPathForUpdateRecord, result);
-
           //Picu event recordUpdated dan kirimkan data ke parent component
           vm.$emit("recordUpdated", result);
         })
         .catch(function(error) {
-          Object.assign(vm.recordError, error.response.data.error);
+          vm.recordError = Object.assign(
+            {},
+            vm.recordError,
+            error.response.data.error
+          );
           vm.$store.commit("globalNotification/show", {
             color: "error",
             message: error

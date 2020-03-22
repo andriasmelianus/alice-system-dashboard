@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="singleColumnTableHeader"
-    :items="tableRecords"
+    :items="records"
     show-select
     single-select
     v-model="selectedRecords"
@@ -14,7 +14,11 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="showUpdateForm" :disabled="!selectedRecordExists">
+          <v-list-item @click="showForm(false)">
+            <v-list-item-title>Baru</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="showForm(true)" :disabled="!selectedRecordExists">
             <v-list-item-title>Ubah</v-list-item-title>
           </v-list-item>
 
@@ -23,24 +27,30 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <v-dialog v-model="formShown" max-width="500px" ref="formDialog">
+        <user-form
+          :record="editedRecord"
+          :edit-mode="formEditMode"
+          @recordCreated="handleRecordCreated($event)"
+          @recordUpdated="handleRecordUpdated($event)"
+        ></user-form>
+      </v-dialog>
     </template>
   </v-data-table>
 </template>
 
 <script>
-import { globalTable } from "~/components/_mixin/global-table";
 import { userTable } from "~/components/user/_mixin/table";
+import UserForm from "~/components/user/form/default";
 export default {
-  mixins: [globalTable, userTable],
+  mixins: [userTable],
+  components: {
+    UserForm
+  },
 
   mounted() {
     this.readRecords();
-  },
-
-  methods: {
-    showUpdateForm() {
-      alert("Show update form!");
-    }
   }
 };
 </script>
