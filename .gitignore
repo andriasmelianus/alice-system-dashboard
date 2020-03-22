@@ -90,4 +90,4 @@ sw.*
 *.swp
 
 # Testing page
-pages/test.vue
+pages/test/
