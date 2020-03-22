@@ -12,6 +12,7 @@
  *  selectedRecordIndex
  *  defaultRecord
  *  editedRecord
+ *  search
  *  apiUrl
  *  formShown
  *  formEditMode
@@ -46,6 +47,7 @@ export const globalTable = {
     selectedRecordIndex: undefined,
     defaultRecord: {},
     editedRecord: {},
+    search: "",
 
     // Axios URL
     apiUrl: "",
@@ -98,6 +100,7 @@ export const globalTable = {
 
     /**
      * Menset editedRecord
+     *
      * @param {Object} editedRecord
      */
     setEditedRecord(editedRecord) {
@@ -105,7 +108,18 @@ export const globalTable = {
     },
 
     /**
+     * Menangkap event item-selected dari v-data-table
+     * kemudian menembakkannya kembali ke parent component.
+     *
+     * @param {Object} context
+     */
+    handleRecordSelected(context) {
+      this.$emit("recordSelected", context);
+    },
+
+    /**
      * Menangani event recordCreated yang dihasilkan dari form
+     *
      * @param {Object} createdRecord
      */
     handleRecordCreated(createdRecord) {
