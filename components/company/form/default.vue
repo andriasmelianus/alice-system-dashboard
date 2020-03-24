@@ -11,12 +11,8 @@
       ></v-textarea>
 
       <v-text-field label="Nomor NPWP" v-model="record.tax_id" :error-messages="recordError.tax_id"></v-text-field>
-      <v-text-field label="Bisnis" v-model="record.business" :error-messages="recordError.business"></v-text-field>
-      <v-text-field
-        label="Industri"
-        v-model="record.industry"
-        :error-messages="recordError.industry"
-      ></v-text-field>
+      <business-combobox v-model="record.business" :error-messages="recordError.business"></business-combobox>
+      <industry-combobox v-model="record.industry" :error-messages="recordError.industry"></industry-combobox>
 
       <v-textarea label="Catatan" v-model="record.note" :error-messages="recordError.note" rows="2"></v-textarea>
 
@@ -28,7 +24,13 @@
 
 <script>
 import { companyForm } from "~/components/company/_mixin/form";
+import BusinessCombobox from "~/components/company/combobox/business";
+import IndustryCombobox from "~/components/company/combobox/industry";
 export default {
-  mixins: [companyForm]
+  mixins: [companyForm],
+  components: {
+    BusinessCombobox,
+    IndustryCombobox
+  }
 };
 </script>
