@@ -156,8 +156,8 @@ export const globalTable = {
             }
           })
           .then(function(result) {
-            // vm.$store.dispatch(vm.vuexActionPathForDeleteRecord);
             vm.records.splice(vm.selectedRecordIndex, 1);
+            vm.selectedRecords = [];
           })
           .catch(function(error) {
             vm.$store.commit("globalNotification/show", {

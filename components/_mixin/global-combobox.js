@@ -1,6 +1,21 @@
 /**
  * Mixin Global Auto Complete
- *
+ * Dengan menyertakan mixin ini, control akan mendapatkan item-item berikut ini,
+ * Props:
+ *  value
+ *  errorMessages
+ * Data:
+ *  records
+ *  search
+ *  apiUrl
+ *  noDataText
+ *  apiUrl
+ *  noDataText
+ *  isLoading
+ *  _timerId
+ * Methods:
+ *  querySelection
+ *  handleInput
  */
 export const globalCombobox = {
   props: {
@@ -19,6 +34,9 @@ export const globalCombobox = {
   }),
 
   watch: {
+    value(newValue) {
+      this.search = newValue;
+    },
     search(value) {
       value && value !== this.selectedRecord && this.querySelection(value);
     }
