@@ -1,9 +1,10 @@
 <template>
   <v-combobox
-    @update:search-input="handleInput"
     label="Bisnis"
     item-text="name"
     item-value="name"
+    @update:search-input="handleInput"
+    :value="value"
     :search-input.sync="search"
     :items="records"
     :error-messages="errorMessages"

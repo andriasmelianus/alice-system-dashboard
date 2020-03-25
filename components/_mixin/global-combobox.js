@@ -1,9 +1,12 @@
 /**
  * Mixin Global Auto Complete
+ * Mixin untuk combobox yang mengembalikan nilai String.
  * Dengan menyertakan mixin ini, control akan mendapatkan item-item berikut ini,
+ *
  * Props:
  *  value
  *  errorMessages
+ *
  * Data:
  *  records
  *  search
@@ -13,6 +16,7 @@
  *  noDataText
  *  isLoading
  *  _timerId
+ *
  * Methods:
  *  querySelection
  *  handleInput
@@ -22,25 +26,27 @@ export const globalCombobox = {
     value: String,
     errorMessages: Array
   },
-  data: () => ({
-    records: [],
-    search: null,
+  data: function() {
+    return {
+      records: [],
+      search: this.value,
 
-    apiUrl: "",
+      apiUrl: "",
 
-    noDataText: "Tidak ada data",
-    isLoading: false,
-    _timerId: null
-  }),
-
+      noDataText: "Tidak ada data",
+      isLoading: false,
+      _timerId: null
+    };
+  },
   watch: {
     value(newValue) {
       this.search = newValue;
     },
     search(value) {
-      value && value !== this.selectedRecord && this.querySelection(value);
+      value && value !== this.querySelection(value);
     }
   },
+
   methods: {
     querySelection(value) {
       let vm = this;
