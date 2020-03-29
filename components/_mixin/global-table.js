@@ -2,6 +2,9 @@
  * Mixin global-table merupakan kumpulan data, computed, watch dan methods yang digunakan pada semua v-data-table.
  * Dengan mengikutsertakan mixin ini, anda akan mendapatkan:
  *
+ * props:
+ *  filterDetails
+ *
  * data:
  *  defaultTableHeaders
  *  smallTableHeaders
@@ -21,12 +24,14 @@
  *  selectedRecordExists
  *
  * watch:
+ *  filterDetails
  *  selectedRecords
  *  formShown
  *
  * methods:
  *  readRecords
  *  setEditedRecord
+ *  handleRecordSelected
  *  handleRecordCreated
  *  handleRecordUpdated
  *  deleteSingleRecord
@@ -34,6 +39,9 @@
  *  closeForm
  */
 export const globalTable = {
+  props: {
+    filterDetails: Object
+  },
   data: () => ({
     // Table headers
     defaultTableHeaders: [],
@@ -63,6 +71,15 @@ export const globalTable = {
   },
 
   watch: {
+    /**
+     * Melakukan pengambilan data ke server setiap kali filterDetails berubah
+     * @param {Object} newFilterDetails
+     * @param {Object} oldFilterDetails
+     */
+    filterDetails(newFilterDetails, oldFilterDetails) {
+      this.readRecords();
+    },
+
     selectedRecords(newSelectedRecords, oldSelectedRecords) {
       //Masukkan record pertama yang terpililh
       this.selectedRecord = Object.assign(
@@ -81,12 +98,15 @@ export const globalTable = {
   },
   methods: {
     /**
-     * Membaca data dari dalam database kemudian dimasukkan ke dalam Vuex
+     * Membaca data dari dalam database
      */
     readRecords() {
       let vm = this;
+
       vm.$axios
-        .$get(vm.$store.getters.apiUrl(vm.apiUrl))
+        .$get(vm.$store.getters.apiUrl(vm.apiUrl), {
+          params: vm.filterDetails
+        })
         .then(function(result) {
           vm.records = result;
         })
