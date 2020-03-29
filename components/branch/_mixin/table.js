@@ -8,6 +8,12 @@ import { defaultRecord } from "./record";
 export const branchTable = {
   mixins: [globalTable],
 
+  watch: {
+    filterDetails(newFilterDetails, oldFilterDetails) {
+      this.editedRecord.company_id = newFilterDetails.value;
+    }
+  },
+
   data: () => ({
     defaultTableHeaders: [
       { text: "Nama", value: "name", align: "left" },

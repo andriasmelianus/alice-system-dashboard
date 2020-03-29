@@ -1,5 +1,6 @@
 export const defaultRecord = {
   id: "",
+  company_id: "",
   name: "",
   code: "",
   phone: "",
@@ -11,6 +12,7 @@ export const defaultRecord = {
 };
 
 export const defaultRecordError = {
+  company_id: [],
   name: [],
   code: [],
   phone: [],
