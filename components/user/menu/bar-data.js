@@ -1,4 +1,9 @@
 export const userMenuData = [
-  { title: 'Akun Saya', url: '/user/account', icon: 'mdi-account-card-details' },
-  { title: 'Logout', url: '/logout', icon:'mdi-logout' },
-]
+  {
+    title: "Perusahaan",
+    url: "/company/select",
+    icon: "mdi-office-building"
+  },
+  { title: "Akun Saya", url: "/user/account", icon: "mdi-account-box" },
+  { title: "Logout", url: "/logout", icon: "mdi-logout" }
+];
