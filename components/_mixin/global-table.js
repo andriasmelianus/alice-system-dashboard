@@ -178,6 +178,8 @@ export const globalTable = {
           .then(function(result) {
             vm.records.splice(vm.selectedRecordIndex, 1);
             vm.selectedRecords = [];
+
+            vm.$emit("recordSelected", []);
           })
           .catch(function(error) {
             vm.$store.commit("globalNotification/show", {
