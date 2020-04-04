@@ -14,14 +14,17 @@ export const roleTable = {
       { text: "Slug", value: "slug" },
       { text: "Special", value: "special" },
       { text: "Diinput", value: "created_at" },
-      { text: "Diupdate", value: "updated_at" }
+      { text: "Diupdate", value: "updated_at" },
     ],
-    smallTableHeaders: [{ text: "Nama", value: "name", align: "left" }],
+    smallTableHeaders: [
+      { text: "Nama", value: "name", align: "left" },
+      { text: "Special", value: "special" },
+    ],
     singleColumnTableHeader: [{ text: "Nama", value: "name", align: "left" }],
 
     defaultRecord: defaultRecord,
     editedRecord: defaultRecord,
 
-    apiUrl: "/auth/role"
-  })
+    apiUrl: "/auth/role",
+  }),
 };
