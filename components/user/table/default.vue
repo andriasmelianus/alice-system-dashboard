@@ -8,6 +8,13 @@
     :search="search"
     @item-selected="handleRecordSelected"
   >
+    <template v-slot:item.is_active="{ item }">
+      <div>
+        <v-chip color="success" v-if="item.is_active" small></v-chip>
+        <v-chip color="error" v-else small></v-chip>
+      </div>
+    </template>
+
     <template v-slot:top>
       <v-toolbar short flat>
         <v-btn @click="showForm(false)" color="success">Baru</v-btn>&nbsp;
