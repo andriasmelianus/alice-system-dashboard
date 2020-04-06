@@ -27,6 +27,11 @@ import UserTable from "~/components/user/table/default";
 import RoleUserTable from "~/components/role/table/role-user";
 export default {
   layout: "dashboard",
+  head() {
+    return {
+      title: "Data Pengguna"
+    };
+  },
   components: {
     UserTable,
     RoleUserTable

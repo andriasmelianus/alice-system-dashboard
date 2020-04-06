@@ -27,6 +27,11 @@ import RoleTable from "~/components/role/table/default";
 import PermissionTable from "~/components/permission/table/permission-role";
 export default {
   layout: "dashboard",
+  head() {
+    return {
+      title: "Data Role"
+    };
+  },
   components: {
     RoleTable,
     PermissionTable
