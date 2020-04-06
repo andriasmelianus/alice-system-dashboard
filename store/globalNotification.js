@@ -1,13 +1,13 @@
 export const state = () => ({
   isShown: false,
   color: "success",
-  message: ""
+  message: "",
 });
 
 export const getters = {
-  isShown: state => {
+  isShown: (state) => {
     return state.isShown;
-  }
+  },
 };
 
 export const mutations = {
@@ -42,5 +42,5 @@ export const mutations = {
     } else {
       state.message = rawMessage.message;
     }
-  }
+  },
 };
