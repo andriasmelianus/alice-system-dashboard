@@ -41,7 +41,6 @@ export default {
   data: () => ({
     // Karena data diambil dari tabel/view intermediate (v_permission_role)
     defaultTableHeaders: [
-      { text: "Layanan", value: "service", align: "left" },
       { text: "Nama", value: "permission", align: "left" }, // Letak perbedaannya hanya di kolom ini
       { text: "Slug", value: "slug" },
       { text: "Diinput", value: "created_at" },

@@ -1,12 +1,10 @@
 export const defaultRecord = {
   id: "",
-  service_id: "",
   name: "",
-  slug: ""
+  slug: "",
 };
 
 export const defaultRecordError = {
-  service_id: [],
   name: [],
-  slug: []
+  slug: [],
 };

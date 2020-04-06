@@ -2,8 +2,6 @@
   <!-- <v-container class="fill-height" fluid> -->
   <div>
     <div class="d-flex flex-wrap justify-center">
-      <service-widget-link-one class="ma-2 align-self-start"></service-widget-link-one>
-
       <role-widget-link-one class="ma-2 align-self-start"></role-widget-link-one>
 
       <user-widget-link-for-system class="ma-2 align-self-start"></user-widget-link-for-system>
@@ -32,7 +30,6 @@
 </template>
 
 <script>
-import ServiceWidgetLinkOne from "~/components/service/widget/link-one";
 import RoleWidgetLinkOne from "~/components/role/widget/link-one";
 import UserWidgetLinkForSystem from "~/components/user/widget/link-for-system";
 import CompanyWidgetLinkForSystem from "~/components/company/widget/link-for-system";
@@ -56,7 +53,6 @@ export default {
   },
 
   components: {
-    ServiceWidgetLinkOne,
     RoleWidgetLinkOne,
     UserWidgetLinkForSystem,
     CompanyWidgetLinkForSystem,

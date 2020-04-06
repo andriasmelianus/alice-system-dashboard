@@ -10,21 +10,17 @@ export const permissionTable = {
 
   data: () => ({
     defaultTableHeaders: [
-      { text: "Layanan", value: "service", align: "left" },
       { text: "Nama", value: "name", align: "left" },
       { text: "Slug", value: "slug" },
       { text: "Diinput", value: "created_at" },
-      { text: "Diupdate", value: "updated_at" }
+      { text: "Diupdate", value: "updated_at" },
     ],
-    smallTableHeaders: [
-      { text: "Layanan", value: "service", align: "left" },
-      { text: "Nama", value: "name", align: "left" }
-    ],
+    smallTableHeaders: [{ text: "Nama", value: "name", align: "left" }],
     singleColumnTableHeader: [{ text: "Nama", value: "name", align: "left" }],
 
     defaultRecord: defaultRecord,
     editedRecord: defaultRecord,
 
-    apiUrl: "/auth/permission"
-  })
+    apiUrl: "/auth/permission",
+  }),
 };
