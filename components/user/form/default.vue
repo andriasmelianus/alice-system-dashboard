@@ -6,6 +6,7 @@
         label="Username"
         v-model="record.username"
         :error-messages="recordError.username"
+        :disabled="editMode"
       ></v-text-field>
       <v-text-field
         label="Password"

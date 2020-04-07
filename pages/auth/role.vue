@@ -23,10 +23,13 @@
 </template>
 
 <script>
+import { permissionCheck } from "~/components/_mixin/permission-check";
 import RoleTable from "~/components/role/table/default";
 import PermissionTable from "~/components/permission/table/permission-role";
 export default {
+  middleware: "auth",
   layout: "dashboard",
+  mixins: [permissionCheck],
   head() {
     return {
       title: "Data Role"
@@ -37,6 +40,8 @@ export default {
     PermissionTable
   },
   data: () => ({
+    permissionRequired: "read-role",
+
     componentClass: "my-2 mx-1 align-self-start",
 
     permissionTableEnabled: false,

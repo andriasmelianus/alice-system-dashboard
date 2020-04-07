@@ -23,9 +23,12 @@
 </template>
 
 <script>
+import { permissionCheck } from "~/components/_mixin/permission-check";
 import UserTable from "~/components/user/table/default";
 import RoleUserTable from "~/components/role/table/role-user";
 export default {
+  middleware: "auth",
+  mixins: [permissionCheck],
   layout: "dashboard",
   head() {
     return {
@@ -37,6 +40,7 @@ export default {
     RoleUserTable
   },
   data: () => ({
+    permissionRequired: "read-user",
     componentClass: "my-2 mx-1 align-self-start",
 
     roleTableEnabled: false,

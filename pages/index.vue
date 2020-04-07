@@ -2,11 +2,11 @@
   <!-- <v-container class="fill-height" fluid> -->
   <div>
     <div class="d-flex flex-wrap justify-center">
-      <role-widget-link-one class="ma-2 align-self-start"></role-widget-link-one>
+      <role-widget-link-one v-if="$auth.user.id == 1" class="ma-2 align-self-start"></role-widget-link-one>
 
-      <user-widget-link-for-system class="ma-2 align-self-start"></user-widget-link-for-system>
+      <user-widget-link-for-system v-if="$auth.user.id == 1" class="ma-2 align-self-start"></user-widget-link-for-system>
 
-      <company-widget-link-for-system class="ma-2 align-self-start"></company-widget-link-for-system>
+      <company-widget-link-for-system v-if="$auth.user.id == 1" class="ma-2 align-self-start"></company-widget-link-for-system>
 
       <user-widget-link-one class="ma-2 align-self-start"></user-widget-link-one>
 
