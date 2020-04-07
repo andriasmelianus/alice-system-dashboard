@@ -9,6 +9,18 @@
     </template>
 
     <v-list>
+      <v-list-item>
+        <v-list-item-avatar>
+          <img v-if="$auth.user.id == 1" src="/avatar/system.png" alt="System" />
+          <img v-else src="/avatar/empty.png" alt="Avatar" />
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ $auth.user.name }}</v-list-item-title>
+          <v-list-item-subtitle>{{ $auth.user.username }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
       <v-list-item v-for="(item, index) in userMenu" :key="index" nuxt :to="item.url">
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
