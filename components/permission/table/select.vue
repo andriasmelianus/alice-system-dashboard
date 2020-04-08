@@ -30,7 +30,6 @@ export default {
   mixins: [permissionTable],
   props: {
     roleId: {
-      type: Number,
       required: true
     }
   },

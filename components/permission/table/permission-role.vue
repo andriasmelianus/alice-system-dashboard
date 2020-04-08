@@ -11,7 +11,7 @@
       <v-toolbar short flat>
         <v-btn @click="showForm(false)" color="success">Tambah</v-btn>&nbsp;&nbsp;
         <v-btn @click="deleteMultipleRecords" v-if="selectedRecordExists" color="error">Hapus</v-btn>&nbsp;&nbsp;
-        <v-dialog v-model="formShown" max-width="700px" ref="formDialog">
+        <v-dialog v-model="formShown" max-width="800px" ref="formDialog">
           <permission-select :role-id="roleId" @recordAdded="handleRecordAdded"></permission-select>
         </v-dialog>
 
@@ -94,6 +94,7 @@ export default {
           })
           .then(function(result) {
             vm.readRecords();
+            vm.selectedRecords = [];
 
             vm.$emit("recordSelected", []);
           })
