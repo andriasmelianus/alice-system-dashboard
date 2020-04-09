@@ -3,7 +3,8 @@
     <template v-slot:activator="{ on }">
       <v-btn v-on="on" icon large>
         <v-avatar size="32px" item>
-          <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify" />
+          <img v-if="$auth.user.id == 1" src="/avatar/system.png" alt="System" />
+          <img v-else src="/avatar/empty.png" alt="Avatar" />
         </v-avatar>
       </v-btn>
     </template>
