@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import { globalCombobox } from "~/components/_mixin/global-combobox";
+import { globalComboboxAutocomplete } from "~/components/_mixin/global-combobox-autocomplete";
 export default {
-  mixins: [globalCombobox],
+  mixins: [globalComboboxAutocomplete],
 
   data: () => ({
     apiUrl: "/company-industry"

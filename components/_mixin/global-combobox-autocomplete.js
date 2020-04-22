@@ -1,7 +1,8 @@
 /**
- * Mixin Global Auto Complete
+ * Mixin Global Combobox Auto Complete
  * Mixin untuk combobox yang mengembalikan nilai String.
- * Dengan menyertakan mixin ini, control akan mendapatkan item-item berikut ini,
+ * Menggunakan kontrol ini memungkinkan user untuk menambahkan nilai yang baru
+ * yang belum ada sebelumnya pada combobox.
  *
  * Props:
  *  value
@@ -21,7 +22,7 @@
  *  querySelection
  *  handleInput
  */
-export const globalCombobox = {
+export const globalComboboxAutocomplete = {
   props: {
     value: String,
     errorMessages: Array
