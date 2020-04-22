@@ -19,6 +19,7 @@
  *  apiUrl
  *  formShown
  *  formEditMode
+ *  reloadAfterModification
  *
  * computed:
  *  selectedRecordExists
@@ -35,6 +36,7 @@
  *  handleRecordCreated
  *  handleRecordUpdated
  *  deleteSingleRecord
+ *  deleteMultipleRecords
  *  showForm
  *  closeForm
  */
@@ -62,7 +64,9 @@ export const globalTable = {
 
     // Khusus untuk form
     formShown: false,
-    formEditMode: false
+    formEditMode: false,
+
+    reloadAfterModification: false
   }),
   computed: {
     selectedRecordExists() {
@@ -147,6 +151,10 @@ export const globalTable = {
       let recordsCount = this.records.length;
       this.records.splice(recordsCount, 0, createdRecord);
       this.closeForm();
+
+      if (this.reloadAfterModification) {
+        this.readRecords();
+      }
     },
 
     /**
@@ -161,6 +169,10 @@ export const globalTable = {
       );
       this.records.splice(this.selectedRecordIndex, 1, updatedRecord);
       this.closeForm();
+
+      if (this.reloadAfterModification) {
+        this.readRecords();
+      }
     },
 
     /**
@@ -187,6 +199,46 @@ export const globalTable = {
               message: error
             });
           });
+
+        if (this.reloadAfterModification) {
+          this.readRecords();
+        }
+      }
+    },
+
+    /**
+     * Menghapus banyak record sekaligus
+     * Function akan mengirimkan ID-ID yang akan dihapus dengan nama parameter IDs.
+     */
+    deleteMultipleRecords() {
+      if (confirm("Anda yakin akan menghapus data tersebut?")) {
+        let vm = this,
+          selectedIds = vm.selectedRecords.map(function(selectedRecords) {
+            return selectedRecords["id"];
+          });
+
+        vm.$axios
+          .$delete(vm.$store.getters.apiUrl(vm.apiUrl), {
+            params: {
+              ids: selectedIds
+            }
+          })
+          .then(function(result) {
+            vm.readRecords();
+            vm.selectedRecords = [];
+
+            vm.$emit("recordSelected", []);
+          })
+          .catch(function(error) {
+            vm.$store.commit("globalNotification/show", {
+              color: "error",
+              message: error
+            });
+          });
+
+        if (this.reloadAfterModification) {
+          this.readRecords();
+        }
       }
     },
 
