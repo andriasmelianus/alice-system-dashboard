@@ -1,5 +1,5 @@
 <template>
-  <v-card hover max-width="280px" nuxt to="/auth/user" color="red lighten-4">
+  <v-card hover max-width="280px" nuxt to="/manage/user" color="red lighten-4">
     <v-list-item>
       <v-list-item-avatar>
         <v-icon dense x-large>mdi-account-supervisor-circle</v-icon>

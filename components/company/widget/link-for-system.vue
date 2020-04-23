@@ -1,5 +1,5 @@
 <template>
-  <v-card hover max-width="300px" nuxt to="/company" color="red lighten-4">
+  <v-card hover max-width="300px" nuxt to="/manage/company" color="red lighten-4">
     <v-list-item>
       <v-list-item-avatar>
         <v-icon dense x-large>mdi-home-group</v-icon>

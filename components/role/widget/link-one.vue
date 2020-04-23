@@ -1,5 +1,5 @@
 <template>
-  <v-card hover max-width="200px" nuxt to="/auth/role" color="red lighten-4">
+  <v-card hover max-width="200px" nuxt to="/manage/role" color="red lighten-4">
     <v-list-item>
       <v-list-item-avatar>
         <v-icon dense x-large>mdi-account-tie</v-icon>
