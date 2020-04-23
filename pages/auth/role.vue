@@ -40,7 +40,7 @@ export default {
     PermissionTable
   },
   data: () => ({
-    permissionRequired: "read-role",
+    permissionRequired: "manage-system",
 
     componentClass: "my-2 mx-1 align-self-start",
 

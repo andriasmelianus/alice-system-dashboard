@@ -24,7 +24,7 @@
 
 <script>
 import { permissionCheck } from "~/components/_mixin/permission-check";
-import UserTable from "~/components/user/table/default";
+import UserTable from "~/components/user/table/default-for-system";
 import RoleUserTable from "~/components/role/table/role-user";
 export default {
   middleware: "auth",
@@ -40,7 +40,7 @@ export default {
     RoleUserTable
   },
   data: () => ({
-    permissionRequired: "read-user",
+    permissionRequired: "manage-system",
     componentClass: "my-2 mx-1 align-self-start",
 
     roleTableEnabled: false,

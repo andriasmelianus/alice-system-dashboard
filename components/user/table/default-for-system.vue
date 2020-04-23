@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import { userTable } from "~/components/user/_mixin/table";
-import UserForm from "~/components/user/form/default";
+import { userTable } from "~/components/user/_mixin/table-for-system";
+import UserForm from "~/components/user/form/default-for-system";
 export default {
   mixins: [userTable],
 

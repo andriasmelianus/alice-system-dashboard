@@ -1,5 +1,6 @@
 export const defaultRecord = {
   id: "",
+  company_id: undefined,
   name: "",
   username: "",
   password: "",
@@ -13,6 +14,7 @@ export const defaultRecord = {
 };
 
 export const defaultRecordError = {
+  company_id: [],
   name: [],
   username: [],
   password: [],
