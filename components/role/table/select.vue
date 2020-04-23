@@ -31,7 +31,8 @@ export default {
   props: {
     userId: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     }
   },
   data: () => ({
