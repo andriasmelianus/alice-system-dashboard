@@ -21,12 +21,6 @@
 
         <branch-table :filter-details="branchFilterDetails"></branch-table>
       </v-card>
-
-      <v-card max-width="400px" :class="componentClass" :disabled="!userFilterEnabled">
-        <v-card-title>Pengguna</v-card-title>
-        <v-card-subtitle>Data pengguna yang dapat mengakses data perusahaan terpilih.</v-card-subtitle>
-        <user-table :filter-details="userFilterDetails"></user-table>
-      </v-card>
     </div>
   </div>
 </template>
@@ -35,7 +29,6 @@
 import { permissionCheck } from "~/components/_mixin/permission-check";
 import CompanyTable from "~/components/company/table/default";
 import BranchTable from "~/components/branch/table/single-column";
-import UserTable from "~/components/user/table/company-user";
 export default {
   middleware: "auth",
   mixins: [permissionCheck],
@@ -48,18 +41,15 @@ export default {
 
   components: {
     CompanyTable,
-    BranchTable,
-    UserTable
+    BranchTable
   },
 
   data: () => ({
     permissionRequired: "read-company",
     componentClass: "my-2 mx-1 align-self-start",
     branchTableEnabled: false,
-    userFilterEnabled: false,
 
-    branchFilterDetails: {},
-    userFilterDetails: {}
+    branchFilterDetails: {}
   }),
 
   methods: {
@@ -71,21 +61,13 @@ export default {
           value: context.item.id
         });
 
-        vm.userFilterDetails = Object.assign({}, vm.userFilterDetails, {
-          column: "company_id",
-          value: context.item.id
-        });
-
         vm.branchTableEnabled = true;
-        vm.userFilterEnabled = true;
 
         return;
       }
       vm.branchTableEnabled = false;
-      vm.userFilterEnabled = false;
 
       vm.branchFilterDetails = {};
-      vm.userFilterDetails = {};
     }
   }
 };
