@@ -1,4 +1,7 @@
-<!-- Komponen ini menampilkan data perusahaan di mana user tersebut terdaftar -->
+<!--
+  Komponen ini menampilkan data perusahaan di mana user tersebut terdaftar.
+  Semenjak many-to-many antara tabel user dan company tidak didukung, maka komponen ini tidak berfungsi.
+-->
 <template>
   <v-data-table
     :headers="defaultTableHeaders"

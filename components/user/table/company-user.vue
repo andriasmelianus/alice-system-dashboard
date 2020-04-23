@@ -1,4 +1,7 @@
-<!-- Komponen ini menampilkan data user yang terdaftar pada perusahaan yang sedang dipilih (filterDetails) -->
+<!--
+  Komponen ini menampilkan data user yang terdaftar pada perusahaan yang sedang dipilih (filterDetails)
+  Semenjak many-to-many antara tabel user dan company tidak didukung, maka komponen ini tidak berfungsi.
+-->
 <template>
   <v-data-table
     :headers="singleColumnTableHeader"
