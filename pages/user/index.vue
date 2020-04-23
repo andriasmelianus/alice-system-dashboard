@@ -1,51 +1,72 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title>Data Pengguna</v-card-title>
-          <v-card-subtitle>Pada halaman ini Anda dapat mengelola data pengguna yang terdaftar pada perusahaan yang sedang aktif terpilih.</v-card-subtitle>
+  <div>
+    <div class="mt-4 mx-9">
+      <div class="display-1 text-center">Manajemen Data Pengguna</div>
+    </div>
 
-          <v-card-text>
-            <v-btn color="success">Tambah</v-btn>
-            <v-btn color="warning" v-if="userDataSelected.length > 0">Ubah</v-btn>
-            <v-btn color="error" v-if="userDataSelected.length > 0">Hapus</v-btn>
-          </v-card-text>
+    <div class="d-flex flex-wrap justify-center">
+      <v-card max-width="800px" :class="componentClass">
+        <!-- JUDUL CARD -->
+        <v-card-title>Pengguna</v-card-title>
+        <!-- SUB-JUDUL CARD -->
+        <v-card-subtitle>Anda dapat mengelola data pengguna yang terdapat pada perusahaan Anda. Halaman ini memungkinkan Anda untuk menambah, mengubah dan menghapus data pengguna. Selain itu Anda juga dapat mereset password pengguna apabila pengguna yang bersangkutan lupa password.</v-card-subtitle>
 
-          <v-data-table
-            show-select
-            single-select
-            v-model="userDataSelected"
-            :headers="userDataHeaders"
-            :items="userData"
-          ></v-data-table>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        <user-table @recordSelected="userRecordSelected"></user-table>
+      </v-card>
+
+      <v-card max-width="400px" :class="componentClass" :disabled="!roleTableEnabled">
+        <v-card-title>Role</v-card-title>
+        <v-card-subtitle>Role menentukan peran seorang pengguna dan hak-haknya di dalam sistem. Mohon berhati-hati dalam menambahkan role kepada pengguna untuk menghindari pemberian hak yang seharusnya tidak dimiliki seorang pengguna.</v-card-subtitle>
+
+        <role-user-table :filter-details="roleFilterDetails"></role-user-table>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
+import { permissionCheck } from "~/components/_mixin/permission-check";
+import UserTable from "~/components/user/table/default";
+import RoleUserTable from "~/components/role/table/role-user";
 export default {
   middleware: "auth",
+  mixins: [permissionCheck],
   layout: "dashboard",
   head() {
     return {
       title: "Data Pengguna"
     };
   },
+  components: {
+    UserTable,
+    RoleUserTable
+  },
 
   mounted() {},
 
   data: () => ({
-    userDataHeaders: [
-      { text: "Pengguna", value: "name" },
-      { text: "Username", value: "username" },
-      { text: "Username", value: "username" }
-    ],
-    userData: undefined,
-    userDataSelected: []
-  })
+    permissionRequired: "read-user",
+    componentClass: "my-2 mx-1 align-self-start",
+
+    roleTableEnabled: false,
+    roleFilterDetails: {}
+  }),
+
+  methods: {
+    userRecordSelected(context) {
+      let vm = this;
+      if (context.value) {
+        vm.roleFilterDetails = Object.assign({}, vm.roleFilterDetails, {
+          column: "user_id",
+          value: context.item.id
+        });
+        vm.roleTableEnabled = true;
+        return;
+      }
+      vm.roleTableEnabled = false;
+      vm.roleFilterDetails = {};
+    }
+  }
 };
 </script>
 
