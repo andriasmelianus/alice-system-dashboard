@@ -18,7 +18,9 @@
 
         <v-list-item-content>
           <v-list-item-title>{{ $auth.user.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{ $auth.user.username }}</v-list-item-subtitle>
+          <v-list-item-subtitle>
+            <div v-if="$auth.user.branch">Cabang: {{ $auth.user.branch.name }}</div>
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
