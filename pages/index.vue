@@ -8,9 +8,9 @@
 
       <company-widget-link-for-system v-if="$auth.user.id == 1" class="ma-2 align-self-start"></company-widget-link-for-system>
 
-      <user-widget-link-one class="ma-2 align-self-start"></user-widget-link-one>
-
       <company-widget-link-one class="ma-2 align-self-start"></company-widget-link-one>
+
+      <user-widget-link-one class="ma-2 align-self-start"></user-widget-link-one>
 
       <link-to-testing-page class="ma-2 align-self-start"></link-to-testing-page>
     </div>
