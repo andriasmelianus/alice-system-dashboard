@@ -1,6 +1,7 @@
 <template>
   <v-form @submit.prevent="submitForm" class="pa-4">
     <company-autocomplete v-model="record.company_id" :error-messages="recordError.company_id"></company-autocomplete>
+    <branch-autocomplete v-model="record.branch_id" :error-messages="recordError.branch_id"></branch-autocomplete>
     <v-text-field label="Nama" v-model="record.name" :error-messages="recordError.name"></v-text-field>
     <v-text-field
       label="Username"
@@ -37,7 +38,8 @@
 
 <script>
 import { userForm } from "~/components/user/_mixin/form";
-import CompanyAutocomplete from "~/components/company/autocomplete/company";
+import CompanyAutocomplete from "~/components/company/autocomplete/default";
+import BranchAutocomplete from "~/components/branch/autocomplete/default";
 import AddressInput from "~/components/contact/combobox/address";
 import CityInput from "~/components/contact/combobox/city";
 import RegionInput from "~/components/contact/combobox/region";
@@ -47,6 +49,7 @@ export default {
 
   components: {
     CompanyAutocomplete,
+    BranchAutocomplete,
     AddressInput,
     CityInput,
     RegionInput,

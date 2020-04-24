@@ -1,5 +1,6 @@
 <template>
   <v-form @submit.prevent="submitForm" class="pa-4">
+    <branch-autocomplete v-model="record.branch_id" :error-messages="recordError.branch_id"></branch-autocomplete>
     <v-text-field label="Nama" v-model="record.name" :error-messages="recordError.name"></v-text-field>
     <v-text-field
       label="Username"
@@ -36,6 +37,7 @@
 
 <script>
 import { userForm } from "~/components/user/_mixin/form";
+import BranchAutocomplete from "~/components/branch/autocomplete/default";
 import AddressInput from "~/components/contact/combobox/address";
 import CityInput from "~/components/contact/combobox/city";
 import RegionInput from "~/components/contact/combobox/region";
@@ -44,6 +46,7 @@ export default {
   mixins: [userForm],
 
   components: {
+    BranchAutocomplete,
     AddressInput,
     CityInput,
     RegionInput,
