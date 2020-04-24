@@ -36,12 +36,14 @@
       </v-menu>
 
       <v-dialog v-model="formShown" max-width="500px" ref="formDialog">
-        <company-form
-          :record="editedRecord"
-          :edit-mode="formEditMode"
-          @recordCreated="handleRecordCreated($event)"
-          @recordUpdated="handleRecordUpdated($event)"
-        ></company-form>
+        <v-card>
+          <company-form
+            :record="editedRecord"
+            :edit-mode="formEditMode"
+            @recordCreated="handleRecordCreated($event)"
+            @recordUpdated="handleRecordUpdated($event)"
+          ></company-form>
+        </v-card>
       </v-dialog>
     </template>
   </v-data-table>

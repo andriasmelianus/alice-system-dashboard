@@ -39,12 +39,14 @@
       </v-menu>
 
       <v-dialog v-model="formShown" max-width="500px" ref="formDialog">
-        <branch-form
-          :record="editedRecord"
-          :edit-mode="formEditMode"
-          @recordCreated="handleRecordCreated($event)"
-          @recordUpdated="handleRecordUpdated($event)"
-        ></branch-form>
+        <v-card>
+          <branch-form
+            :record="editedRecord"
+            :edit-mode="formEditMode"
+            @recordCreated="handleRecordCreated($event)"
+            @recordUpdated="handleRecordUpdated($event)"
+          ></branch-form>
+        </v-card>
       </v-dialog>
     </template>
   </v-data-table>

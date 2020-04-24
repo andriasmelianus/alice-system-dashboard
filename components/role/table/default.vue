@@ -16,12 +16,14 @@
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>&nbsp;
         <v-dialog v-model="formShown" max-width="500px" ref="formDialog">
-          <role-form
-            :record="editedRecord"
-            :edit-mode="formEditMode"
-            @recordCreated="handleRecordCreated($event)"
-            @recordUpdated="handleRecordUpdated($event)"
-          ></role-form>
+          <v-card>
+            <role-form
+              :record="editedRecord"
+              :edit-mode="formEditMode"
+              @recordCreated="handleRecordCreated($event)"
+              @recordUpdated="handleRecordUpdated($event)"
+            ></role-form>
+          </v-card>
         </v-dialog>&nbsp;
         <v-text-field
           label="Cari"

@@ -1,39 +1,37 @@
 <template>
-  <v-card>
-    <v-form @submit.prevent="submitForm" class="pa-4">
-      <v-text-field label="Nama" v-model="record.name" :error-messages="recordError.name"></v-text-field>
-      <v-text-field
-        label="Username"
-        v-model="record.username"
-        :error-messages="recordError.username"
-        :disabled="editMode"
-      ></v-text-field>
-      <v-text-field
-        label="Password"
-        v-model="record.password"
-        :error-messages="recordError.password"
-        type="password"
-      ></v-text-field>
-      <v-checkbox
-        v-model="record.is_active"
-        :label="record.is_active ? 'Aktif' : 'Tidak aktif'"
-        color="success"
-      ></v-checkbox>
-      <v-text-field
-        label="No.Identitas"
-        v-model="record.id_number"
-        :error-messages="recordError.id_number"
-      ></v-text-field>
-      <v-text-field label="Telepon" v-model="record.phone" :error-messages="recordError.phone"></v-text-field>
-      <address-input v-model="record.address" :error-messages="recordError.address"></address-input>
-      <city-input v-model="record.city" :error-messages="recordError.city"></city-input>
-      <region-input v-model="record.region" :error-messages="recordError.region"></region-input>
-      <country-input v-model="record.country" :error-messages="recordError.country"></country-input>
+  <v-form @submit.prevent="submitForm" class="pa-4">
+    <v-text-field label="Nama" v-model="record.name" :error-messages="recordError.name"></v-text-field>
+    <v-text-field
+      label="Username"
+      v-model="record.username"
+      :error-messages="recordError.username"
+      :disabled="editMode"
+    ></v-text-field>
+    <v-text-field
+      label="Password"
+      v-model="record.password"
+      :error-messages="recordError.password"
+      type="password"
+    ></v-text-field>
+    <v-checkbox
+      v-model="record.is_active"
+      :label="record.is_active ? 'Aktif' : 'Tidak aktif'"
+      color="success"
+    ></v-checkbox>
+    <v-text-field
+      label="No.Identitas"
+      v-model="record.id_number"
+      :error-messages="recordError.id_number"
+    ></v-text-field>
+    <v-text-field label="Telepon" v-model="record.phone" :error-messages="recordError.phone"></v-text-field>
+    <address-input v-model="record.address" :error-messages="recordError.address"></address-input>
+    <city-input v-model="record.city" :error-messages="recordError.city"></city-input>
+    <region-input v-model="record.region" :error-messages="recordError.region"></region-input>
+    <country-input v-model="record.country" :error-messages="recordError.country"></country-input>
 
-      <v-btn color="success" type="submit">Simpan</v-btn>
-      <slot name="cancel"></slot>
-    </v-form>
-  </v-card>
+    <v-btn color="success" type="submit">Simpan</v-btn>
+    <slot name="cancel"></slot>
+  </v-form>
 </template>
 
 <script>
