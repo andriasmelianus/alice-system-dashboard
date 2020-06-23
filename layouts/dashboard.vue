@@ -5,10 +5,10 @@
     <!-- HEADER aplikasi -->
 
     <!-- Isi setiap halaman/route -->
-    <v-content>
+    <v-main>
       <!-- Bagian router-view untuk setiap pages -->
       <nuxt />
-    </v-content>
+    </v-main>
 
     <dashboard-footer></dashboard-footer>
 
