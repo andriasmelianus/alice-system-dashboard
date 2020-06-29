@@ -10,7 +10,7 @@
     <!-- Modifikasi kolom nama, sehingga dalam satu kolom dapat menampilkan nama dan deskripsi -->
     <template v-slot:item.name="{ item }">
       <div>{{ item.name }}</div>
-      <div class="caption font-weight-light">{{ item.description }}</div>
+      <div class="text-caption font-weight-light">{{ item.description }}</div>
     </template>
 
     <template v-slot:header.data-table-select>

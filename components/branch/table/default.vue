@@ -33,7 +33,7 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-toolbar-title class="headline">Data Cabang</v-toolbar-title>
+        <v-toolbar-title class="text-h6">Data Cabang</v-toolbar-title>
       </v-toolbar>
     </template>
   </v-data-table>

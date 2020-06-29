@@ -13,7 +13,7 @@
       <div class="title font-weight-light mb-2">Perusahaan</div>
 
       <v-icon class="mr-2" small>mdi-clock</v-icon>
-      <span class="caption grey--text font-weight-light">
+      <span class="text-caption grey--text font-weight-light">
         Total Penghasilan Perusahaan:
         <strong>Rp1.811.000</strong>
       </span>

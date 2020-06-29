@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="520" persistent>
     <v-card>
-      <v-card-title class="display-3 font-weight-light red--text">Tidak Punya Hak</v-card-title>
+      <v-card-title class="text-h6 font-weight-light red--text">Tidak Punya Hak</v-card-title>
       <v-card-text class="font-weight-light">
         Entah apa yang merasuki Anda!
         <br />Mohon maaf, tapi Anda tidak memiliki hak untuk mengakses halaman ini.

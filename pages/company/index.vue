@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-4 mx-9">
-      <div class="display-1 text-center">Data Perusahaan</div>
+      <div class="text-h4 text-center">Data Perusahaan</div>
     </div>
 
     <div class="d-flex flex-wrap justify-center">

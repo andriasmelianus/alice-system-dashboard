@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-4 mx-9">
-      <div class="display-1 text-center">Manajemen Data Perusahaan</div>
+      <div class="text-h4 text-center">Manajemen Data Perusahaan</div>
       <!-- <div
         class="caption"
       >Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam odio modi hic sit sapiente eum magnam similique iusto unde doloribus nihil omnis rerum voluptatem, facilis deleniti quam aliquam maiores totam?</div>-->

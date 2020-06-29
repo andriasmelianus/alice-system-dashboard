@@ -13,7 +13,7 @@
         {{ item.name }}
         <span class="font-weight-light">{{ item.code }}</span>
       </div>
-      <div class="caption font-weight-light">Telepon {{ item.phone }}</div>
+      <div class="text-caption font-weight-light">Telepon {{ item.phone }}</div>
     </template>
 
     <template v-slot:header.data-table-select>

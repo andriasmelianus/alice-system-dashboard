@@ -10,10 +10,10 @@
     </v-sheet>
 
     <v-card-text class="pt-0">
-      <div class="title font-weight-light mb-2">Pembelian</div>
+      <div class="text-subtitle-1 font-weight-light mb-2">Pembelian</div>
 
       <v-icon class="mr-2" small>mdi-clock</v-icon>
-      <span class="caption grey--text font-weight-light">
+      <span class="text-caption grey--text font-weight-light">
         Total pembelian bulan ini:
         <strong>Rp12.380.000</strong>
       </span>

@@ -12,6 +12,8 @@
 
       <user-widget-link-one class="ma-2 align-self-start"></user-widget-link-one>
 
+      <product-widget-link-one class="ma-2 align-self-start"></product-widget-link-one>
+
       <link-to-testing-page class="ma-2 align-self-start"></link-to-testing-page>
     </div>
 
@@ -34,6 +36,7 @@ import RoleWidgetLinkOne from "~/components/role/widget/link-one";
 import UserWidgetLinkForSystem from "~/components/user/widget/link-for-system";
 import CompanyWidgetLinkForSystem from "~/components/company/widget/link-for-system";
 import UserWidgetLinkOne from "~/components/user/widget/link-one";
+import ProductWidgetLinkOne from "~/components/product/widget/link-one";
 import CompanyWidgetLinkOne from "~/components/company/widget/link-one";
 import LinkToTestingPage from "~/components/_other/widget/link-to-testing-page";
 
@@ -57,6 +60,7 @@ export default {
     UserWidgetLinkForSystem,
     CompanyWidgetLinkForSystem,
     UserWidgetLinkOne,
+    ProductWidgetLinkOne,
     CompanyWidgetLinkOne,
     LinkToTestingPage,
 

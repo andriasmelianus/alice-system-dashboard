@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-4 mx-9">
-      <div class="display-1 text-center">Manajemen Data Role</div>
+      <div class="text-h4 text-center">Manajemen Data Role</div>
     </div>
 
     <div class="d-flex flex-wrap justify-center">

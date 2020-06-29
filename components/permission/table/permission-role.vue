@@ -23,7 +23,7 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-toolbar-title class="headline">Data Permission</v-toolbar-title>
+        <v-toolbar-title class="text-h6">Data Permission</v-toolbar-title>
       </v-toolbar>
     </template>
   </v-data-table>

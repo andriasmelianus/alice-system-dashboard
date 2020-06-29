@@ -18,7 +18,7 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-toolbar-title class="headline">Data Role</v-toolbar-title>
+        <v-toolbar-title class="text-h6">Data Role</v-toolbar-title>
       </v-toolbar>
     </template>
   </v-data-table>

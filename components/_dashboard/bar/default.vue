@@ -1,7 +1,7 @@
 <template>
   <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark>
     <v-toolbar-title style="width: 300px">
-      <v-chip class="headline" nuxt to="/" outlined large>{{ appName }}</v-chip>
+      <v-chip class="text-h5 font-weight-light" nuxt to="/" outlined large>{{ appName }}</v-chip>
     </v-toolbar-title>
 
     <!-- <v-text-field
