@@ -105,7 +105,11 @@ export const globalServersideDataIterator = {
      */
     readRecords: function() {
       let vm = this,
-        allParameters = Object.assign({}, this.options, this.otherServerParams);
+        allParameters = Object.assign(
+          {},
+          this.serverParams,
+          this.otherServerParams
+        );
       vm.isLoading = true;
 
       vm.$axios

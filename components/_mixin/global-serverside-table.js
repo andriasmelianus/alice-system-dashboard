@@ -9,7 +9,7 @@ export const globalServersideTable = {
   mixins: [globalTable],
 
   props: {
-    serverParams: Object
+    params: Object
   },
 
   data: () => ({
@@ -17,29 +17,29 @@ export const globalServersideTable = {
     totalRecords: undefined,
 
     // Pagination, sorting, and other search parameters
-    options: {},
-    otherSearchParameters: {},
+    serverParams: {},
+    otherServerParams: {},
     _timerId: undefined,
     isLoading: false
   }),
 
   watch: {
     /**
-     * Memantau perubahan props serverParams
+     * Memantau perubahan props params
      *
      * @param Object newFilterDetails
      * @return void
      */
 
-    serverParams(newFilterDetails, oldFilterDetails) {
+    params(newFilterDetails, oldFilterDetails) {
       let vm = this;
-      vm.otherSearchParameters = Object.assign({}, newFilterDetails);
+      vm.otherServerParams = Object.assign({}, newFilterDetails);
 
       vm.readRecords();
     },
 
     // Memantau perubahan options. Setiap kali user melakukan sort atau pindah halaman, maka kode dijalankan.
-    options: {
+    serverParams: {
       handler() {
         this.readRecords();
       },
@@ -62,7 +62,7 @@ export const globalServersideTable = {
          * maka parameter yang dikirimkan adalah: {merk: "lenovo", keyword: "thinkpad t430"}
          */
 
-        vm.otherSearchParameters = Object.assign({}, vm.otherSearchParameters, {
+        vm.otherServerParams = Object.assign({}, vm.otherServerParams, {
           keyword: newSearchText
         });
 
@@ -79,8 +79,8 @@ export const globalServersideTable = {
       let vm = this,
         allParameters = Object.assign(
           {},
-          this.options,
-          this.otherSearchParameters
+          this.serverParams,
+          this.otherServerParams
         );
       vm.isLoading = true;
 
