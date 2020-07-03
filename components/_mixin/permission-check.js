@@ -1,13 +1,13 @@
 export const permissionCheck = {
   data: () => ({
-    permissionRequired: "",
+    permissionRequired: ""
   }),
   mounted() {
     let userRetreivedPermission = this.$auth.user.permission,
-      userSpecials = userRetreivedPermission.map(function (userPermission) {
+      userSpecials = userRetreivedPermission.map(function(userPermission) {
         return userPermission["special"];
       }),
-      userPermissions = userRetreivedPermission.map(function (userPermission) {
+      userPermissions = userRetreivedPermission.map(function(userPermission) {
         return userPermission["slug"];
       });
 
@@ -27,6 +27,6 @@ export const permissionCheck = {
   methods: {
     preventPageAccess() {
       this.$store.commit("preventAccess/show");
-    },
-  },
+    }
+  }
 };
