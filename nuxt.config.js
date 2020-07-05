@@ -37,7 +37,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@mdi/font/css/materialdesignicons.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
