@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div class="mt-4 mx-9">
-      <div class="text-h4 text-center">Manajemen Data Pengguna</div>
-    </div>
+    <page-title>Manajemen Data Pengguna</page-title>
 
-    <div class="d-flex flex-wrap justify-center">
+    <div class="d-flex flex-wrap">
       <v-card max-width="800px" :class="componentClass">
         <!-- JUDUL CARD -->
         <v-card-title>Pengguna</v-card-title>
@@ -26,6 +24,7 @@
 
 <script>
 import { permissionCheck } from "~/components/_mixin/permission-check";
+import PageTitle from "~/components/_dashboard/title";
 import UserTable from "~/components/user/table/default";
 import RoleUserTable from "~/components/role/table/role-user";
 export default {
@@ -38,6 +37,7 @@ export default {
     };
   },
   components: {
+    PageTitle,
     UserTable,
     RoleUserTable
   },

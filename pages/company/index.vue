@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div class="mt-4 mx-9">
-      <div class="text-h4 text-center">Data Perusahaan</div>
-    </div>
+    <page-title>Data Perusahaan</page-title>
 
-    <div class="d-flex flex-wrap justify-center">
+    <div class="d-flex flex-wrap">
       <v-card max-width="400px" :class="componentClass">
         <!-- JUDUL CARD -->
         <v-card-title>Perusahaan</v-card-title>
@@ -26,6 +24,7 @@
 
 <script>
 import { permissionCheck } from "~/components/_mixin/permission-check";
+import PageTitle from "~/components/_dashboard/title";
 import CompanyForm from "~/components/company/form/default";
 import BranchTable from "~/components/branch/table/default";
 export default {
@@ -39,6 +38,7 @@ export default {
   },
 
   components: {
+    PageTitle,
     CompanyForm,
     BranchTable
   },
