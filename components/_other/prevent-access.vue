@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="text-h4 font-weight-light red--text">Tidak Punya Hak</v-card-title>
       <v-card-text class="font-weight-light">
-        Mohon maaf, tapi Anda tidak memiliki hak untuk mengakses halaman ini.
+        Mohon maaf, Anda tidak memiliki hak untuk mengakses halaman ini.
         Segera kembali ke dashboard Anda dan buka halaman yang sesuai dengan akses yang diberikan kepada Anda.
       </v-card-text>
 

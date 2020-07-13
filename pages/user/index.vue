@@ -2,7 +2,7 @@
   <div>
     <page-title>Manajemen Data Pengguna</page-title>
 
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap align-center mx-3">
       <v-card max-width="800px" :class="componentClass">
         <!-- JUDUL CARD -->
         <v-card-title>Pengguna</v-card-title>

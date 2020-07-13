@@ -2,7 +2,7 @@
   <div>
     <page-title>Data Perusahaan</page-title>
 
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap align-center mx-3">
       <v-card max-width="400px" :class="componentClass">
         <!-- JUDUL CARD -->
         <v-card-title>Perusahaan</v-card-title>

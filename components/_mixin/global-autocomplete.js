@@ -13,8 +13,6 @@
  *  search
  *  apiUrl
  *  noDataText
- *  apiUrl
- *  noDataText
  *  isLoading
  *  _timerId
  *
