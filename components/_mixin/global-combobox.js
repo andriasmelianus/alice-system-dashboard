@@ -1,5 +1,5 @@
 /**
- * Mixin Global Combobox Auto Complete
+ * Mixin Global Combobox
  * Mixin untuk combobox yang mengembalikan nilai String.
  * Menggunakan kontrol ini memungkinkan user untuk menambahkan nilai yang baru
  * yang belum ada sebelumnya pada combobox.
@@ -20,7 +20,7 @@
  *  querySelection
  *  handleInput
  */
-export const globalComboboxAutocomplete = {
+export const globalCombobox = {
   props: {
     value: String,
     errorMessages: Array
